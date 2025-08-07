@@ -1,17 +1,18 @@
 #pragma once
 
+#include <string>
+
 #include "actuator_hal.hpp"
 #include "config.hpp"
 #include "uart.hpp"
-#include <string>
 
 class UartActuatorHal : public ActuatorHal {
 public:
-  UartActuatorHal(const std::string &device_path);
-  ~UartActuatorHal();
+    UartActuatorHal(const std::string &device_path);
+    ~UartActuatorHal();
 
-  Response execute(const Command &cmd) override;
+    Response execute(const Command &cmd) override;
 
 private:
-  Uart uart_;
+    Uart uart_;
 };

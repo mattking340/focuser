@@ -15,130 +15,130 @@ constexpr uint8_t MUX_CHANNEL_AUX = 0x02;
 // GPIO Control
 
 enum class Output : uint8_t {
-  UV_ILLUMINATION,
-  WHITE_ILLUMINATION,
-  RESET_LINE,
+    UV_ILLUMINATION,
+    WHITE_ILLUMINATION,
+    RESET_LINE,
 };
 
 enum class OutputMode : uint8_t {
-  DIGITAL,
-  ANALOG,
+    DIGITAL,
+    ANALOG,
 };
 
 struct OutputCommand {
-  Output pin;
-  OutputMode mode;
-  union {
-    bool state;
-    float current_ma;
-  };
-  uint32_t illumination_dwell_ms;
+    Output pin;
+    OutputMode mode;
+    union {
+        bool state;
+        float current_ma;
+    };
+    uint32_t illumination_dwell_ms;
 };
 
 // Camera Config
 
 enum class CameraType {
-  MAIN,
-  AUX,
+    MAIN,
+    AUX,
 };
 
 struct CameraFormat {
-  uint32_t width_px;
-  uint32_t height_px;
-  uint32_t pixel_format; // V4L2_PIX_FMT_*
+    uint32_t width_px;
+    uint32_t height_px;
+    uint32_t pixel_format;  // V4L2_PIX_FMT_*
 };
 
 struct CameraControls {
-  uint32_t exposure_us;
-  uint32_t gain;
+    uint32_t exposure_us;
+    uint32_t gain;
 };
 
 struct FrameView {
-  const uint8_t *data;
-  size_t length;
-  int index;
+    const uint8_t *data;
+    size_t length;
+    int index;
 };
 
 // Auto focus Config
 
 struct Range {
-  int start;
-  int stop;
-  int step;
+    int start;
+    int stop;
+    int step;
 };
 
 struct FocusSweepParams {
-  Range focus_um;
-  Range stage_steps;
-  uint32_t focus_settle_ms;
-  uint32_t stage_settle_ms;
+    Range focus_um;
+    Range stage_steps;
+    uint32_t focus_settle_ms;
+    uint32_t stage_settle_ms;
 };
 
 enum class FocusType {
-  SWEEP,
-  FIBONACCI,
+    SWEEP,
+    FIBONACCI,
 };
 
 struct FocusParams {
-  FocusType type;
-  union {
-    FocusSweepParams sweep;
-    // other
-  };
+    FocusType type;
+    union {
+        FocusSweepParams sweep;
+        // other
+    };
 };
 
 // Actuator Protocol (Command/Response)
 
 enum class CommandType : uint8_t {
-  MOVE_FOCUS,
-  MOVE_STAGE,
-  GPIO_WRITE,
+    MOVE_FOCUS,
+    MOVE_STAGE,
+    GPIO_WRITE,
 };
 
 enum class ResponseType : uint8_t {
-  OK,
-  ERROR,
-  TIMEOUT,
+    OK,
+    ERROR,
+    TIMEOUT,
 };
 
 struct MoveFocusCommand {
-  int32_t microns;
+    int32_t microns;
 };
 
 struct MoveStageCommand {
-  int32_t steps;
+    int32_t steps;
 };
 
 struct Command {
-  CommandType type;
-  union {
-    MoveFocusCommand move_focus;
-    MoveStageCommand move_stage;
-    OutputCommand output;
-  } payload;
+    CommandType type;
+    union {
+        MoveFocusCommand move_focus;
+        MoveStageCommand move_stage;
+        OutputCommand output;
+    } payload;
 };
 
 struct GpioWriteResponse {
-  float measured_current_ma;
+    float measured_current_ma;
 };
 
 struct MoveStageResponse {
-  int encoder_pos;
-  float position_error_step;
+    int encoder_pos;
+    float position_error_step;
 };
 
 struct MoveFocusResponse {
-  float pwm_duty_cycle;
-  float feedback_voltage_mv;
+    float pwm_duty_cycle;
+    float feedback_voltage_mv;
 };
 
 struct Response {
-  ResponseType type;
-  std::string message;
+    ResponseType type;
+    std::string message;
 
-  union {
-    GpioWriteResponse gpio_write;
-    MoveStageResponse move_stage;
-    MoveFocusResponse move_focus;
-  } payload;
+    union {
+        GpioWriteResponse gpio_write;
+        MoveStageResponse move_stage;
+        MoveFocusResponse move_focus;
+    } payload;
 };

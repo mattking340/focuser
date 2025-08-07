@@ -8,4 +8,4 @@ float random_score(const FrameView &frame);
 
 float laplacian_score(const FrameView &frame);
 
-} // namespace focus_metric
+}  // namespace focus_metric

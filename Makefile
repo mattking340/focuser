@@ -24,9 +24,9 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 format:
-	clang-format -style=LLVM -i $(ALL_SRC)
+	clang-format -i $(ALL_SRC)
 
 clean:
-	rm -rf $(BUILD_DIR) $(BIN)
+	rm -rf $(BUILD_DIR)
 
 .PHONY: all clean format

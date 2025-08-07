@@ -5,10 +5,10 @@
 
 class Mux {
 public:
-  Mux(I2c &i2c);
+    Mux(I2c &i2c);
 
-  bool select(CameraType cam_type);
+    bool select(CameraType cam_type);
 
 private:
-  I2c &i2c_;
+    I2c &i2c_;
 };
