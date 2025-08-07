@@ -36,7 +36,7 @@ Response UartActuatorHal::execute(const Command &cmd) {
   uint8_t tx_buffer[Uart::MAX_FRAME_SIZE] = {0};
   size_t tx_length = 16;
 
-  // send Protobuf frame over UART 
+  // send Protobuf frame over UART
   uart_.send(tx_buffer, tx_length);
 
   // receive Protobuf response frame over UART
@@ -54,10 +54,8 @@ Response UartActuatorHal::execute(const Command &cmd) {
   resp.message = "totally just moved the focus actuator!";
 
   // mock response payload
-  resp.payload.move_focus = {
-      .pwm_duty_cycle = 0.42f,
-      .feedback_voltage_mv = 1234.5f
-  };
+  resp.payload.move_focus = {.pwm_duty_cycle = 0.42f,
+                             .feedback_voltage_mv = 1234.5f};
 
   return resp;
 }
