@@ -1,5 +1,20 @@
 # README.md
 
+## Build
+```
+# Build
+make
+
+# Run
+./build/focuser
+
+# Clean build artifacts
+make clean
+
+# Format
+make format
+```
+
 ## 1. Problem
 
 This project is part of a system that automates the process of capturing focused images. It is responsible for coordinating image acquisition and control of supporting hardware to produce the best possible image for further processing.

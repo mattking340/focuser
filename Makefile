@@ -4,7 +4,7 @@ CXXFLAGS := -std=c++17 -Wall -Iinclude
 SRC_DIR := src
 INC_DIR := include
 BUILD_DIR := build
-BIN := focuser
+BIN := $(BUILD_DIR)/focuser
 
 CPP_FILES := $(shell find $(SRC_DIR) -name '*.cpp')
 HPP_FILES := $(shell find $(INC_DIR) -name '*.hpp')
